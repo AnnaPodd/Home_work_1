@@ -12,6 +12,15 @@
    python manage.py migrate
    4. Запустите локальный сервер:
    python manage.py runserver
+ 
+ - ## Тестирование:
+   1. Для тестирования проекта используется библиотека `pytest`. Чтобы запустить тесты, выполните команду:
+      pytest
+   2. Тесты покрывают следующие модули и функции:
+      - `masks`: функции `get_mask_card_number` и `get_mask_account`.
+      - `widget`: функции `mask_account_card` и `get_date`.
+      - `processing`: функции `filter_by_state` и `sort_by_date`. 
+   3. Покрытие тестами составляет 100% кода проекта.
 
    
    

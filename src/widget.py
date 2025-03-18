@@ -14,31 +14,21 @@ def mask_account_card(card_type_and_number: str) -> str:
             word.append(symbol)
         if symbol.isdigit():
             number.append(symbol)
-    if len(number) == 16:
+    if 13 <= len(number) <= 19:
         return "".join(word) + get_mask_card_number(str("".join(number)))
     else:
         return "".join(word) + get_mask_account(str("".join(number)))
 
 
-print(mask_account_card("Счет 35383033474447895560"))
+print(mask_account_card("Счет 35383033474445555666"))
 
 
 def get_date(original_date: str) -> str:
-    """Функция, принимающая дату и возвращающая ее в другом формате"""
-    new_date = []
-
-    new_date.insert(0, original_date[9])
-    new_date.insert(1, original_date[8])
-    new_date.insert(2, original_date[-7])
-    new_date.insert(3, original_date[5])
-    new_date.insert(4, original_date[6])
-    new_date.insert(5, original_date[-7])
-    new_date.insert(6, original_date[0])
-    new_date.insert(7, original_date[1])
-    new_date.insert(8, original_date[2])
-    new_date.insert(9, original_date[3])
-
-    return "".join(new_date)
+    """Функция, принимающая дату и возвращающая ее в формате DD.MM.YYYY."""
+    date_part = original_date.split('T')[0]
+    year, month, day = date_part.split('-')
+    new_date = f"{day}.{month}.{year}"
+    return new_date
 
 
 print(get_date("2024-03-11T02:26:18.671407"))
