@@ -20,7 +20,7 @@
       - `masks`: функции `get_mask_card_number` и `get_mask_account`.
       - `widget`: функции `mask_account_card` и `get_date`.
       - `processing`: функции `filter_by_state` и `sort_by_date`. 
-   3. Покрытие тестами составляет 100% кода проекта.
+   3. Покрытие тестами составляет более 80 %
 
    
    
