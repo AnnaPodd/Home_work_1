@@ -2,6 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 
+
 load_dotenv()  # Загружаем переменные окружения из .env
 
 API_KEY = os.getenv("API_KEY")
@@ -21,3 +22,5 @@ def get_exchange_rate(currency):
         return data.get('result')  # Возвращаем курс в рублях
     else:
         raise Exception("Ошибка при получении курса валют.")
+
+    

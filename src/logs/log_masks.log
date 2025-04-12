@@ -1,0 +1,47 @@
+import os
+import logging
+
+# Создаем директорию для логов, если она не существует
+if not os.path.exists('logs'):
+    os.makedirs('logs')
+
+# Настройка логгера для модуля utils
+utils_logger = logging.getLogger('utils')
+utils_logger.setLevel(logging.DEBUG)  # Установить уровень логирования не меньше DEBUG
+
+# Создание обработчика для записи логов в файл
+file_handler = logging.FileHandler('logs/utils.log', mode='w')  # Перезапись файла
+file_handler.setLevel(logging.DEBUG)  # Уровень обработчика
+
+# Настройка формата записываемых логов
+file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(file_formatter)
+
+# Добавление обработчика к логгеру
+utils_logger.addHandler(file_handler)
+
+def get_mask_card_number(card_number: int | str) -> str:
+    """Функция, маскирующая номер карты"""
+    str_card_number = str(card_number)
+    if len(str_card_number) < 13 or len(str_card_number) > 19:
+        utils_logger.error(f"Неверная длина номера карты: {str_card_number}")
+        return "Неверная длина номера карты"
+
+    masked_number = f"{str_card_number[:4]} {str_card_number[4:6]}** **** {str_card_number[-4:]}"
+    utils_logger.info(f"Маскированный номер карты: {masked_number}")
+    return masked_number
+
+def get_mask_account(account_number: int | str) -> str:
+    """Функция, маскирующая номер счета"""
+    str_account_number = str(account_number)
+    if len(str_account_number) != 20:
+        utils_logger.error(f"Неверная длина номера счета: {str_account_number}")
+        return "Неверная длина номера счета"
+
+    masked_account = f"**{str_account_number[-4:]}"
+    utils_logger.info(f"Маскированный номер счета: {masked_account}")
+    return masked_account
+
+
+print(get_mask_card_number(1234567890123456))
+print(get_mask_account(73654108430135874305))
