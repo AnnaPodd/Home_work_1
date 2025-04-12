@@ -2,8 +2,8 @@ import json
 import os
 import logging
 
-
 logging.basicConfig(level=logging.INFO)
+
 
 def load_json(json_file_path):
     """Загружает данные из JSON-файла и проверяет формат данных."""
@@ -13,17 +13,18 @@ def load_json(json_file_path):
             if isinstance(data, list):
                 return data
             else:
-                logging.warning("Данные в файле не являются списком.")
+                logging.warning("Данные в файле '%s' не являются списком.", json_file_path)
     except FileNotFoundError:
-        logging.error(f"Файл {json_file_path} не найден.")
+        logging.error("Файл '%s' не найден.", json_file_path)
     except json.JSONDecodeError:
-        logging.error("Ошибка при декодировании JSON.")
+        logging.error("Ошибка при декодировании JSON в файле '%s'.", json_file_path)
     except Exception as e:
-        logging.error(f"Произошла ошибка: {e}")
+        logging.error("Произошла ошибка (%s): %s", type(e).__name__, e)
     return []  # Возвращает пустой список в случае ошибки
 
+
 def main():
-    """Получает путь к директории, где находится этот файл"""
+    """Получает путь к директории, где находится этот файл и загружает данные."""
     current_dir = os.path.dirname(os.path.abspath(__file__))
     json_file_path = os.path.join(current_dir, '..', 'data', 'operations.json')
 
@@ -39,6 +40,7 @@ def main():
         print(data)
     else:
         print("Данные не загружены или файл пуст.")
+
 
 if __name__ == "__main__":
     main()
