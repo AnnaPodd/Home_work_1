@@ -1,22 +1,20 @@
 import json
 import os
 import logging
+from src.config import LOG_DIR, file_formatter
 
 
-utils_logger = logging.getLogger('utils')  # Создаем отдельный логгер для модуля utils
-utils_logger.setLevel(logging.DEBUG)  # Уровень не ниже DEBUG
+utils_logger = logging.getLogger('utils')
+utils_logger.setLevel(logging.DEBUG)
 
 
-file_handler = logging.FileHandler('C:\\Users\\Анна\\PycharmProjects\\home_work\\logs\\utils.log',
-                                   mode='w')
-file_handler.setLevel(logging.DEBUG)  # Уровень обработчика
+utils_file_handler = logging.FileHandler(LOG_DIR / 'utils.log', mode='a')
+utils_file_handler.setLevel(logging.DEBUG)
 
 
-file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-file_handler.setFormatter(file_formatter)
-
-
-utils_logger.addHandler(file_handler)
+utils_file_handler.setFormatter(file_formatter)
+utils_logger.addHandler(utils_file_handler)
+utils_logger.addHandler(utils_file_handler)
 
 
 def load_json(json_file_path):
