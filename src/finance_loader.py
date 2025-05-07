@@ -1,13 +1,13 @@
-from finance_reader import load_csv, load_xlsx
 import os
+
+from finance_reader import load_csv, load_xlsx
 
 
 def finance_loader():
-    csv_file_path = 'C:/Users/Анна/PycharmProjects/home_work/data/transactions.csv'
-    xlsx_file_path = 'C:/Users/Анна/PycharmProjects/home_work/data/transactions_excel.xlsx'
+    csv_file_path = "data/transactions.csv"
+    xlsx_file_path = "data/transactions_excel.xlsx"
 
     print(f"Текущий рабочий каталог: {os.getcwd()}")
-
 
     try:
         csv_data = load_csv(csv_file_path)
@@ -17,7 +17,6 @@ def finance_loader():
         print(f"Ошибка: Файл CSV не найден. {e}")
     except Exception as e:
         print(f"Ошибка при загрузке CSV: {e}")
-
 
     try:
         xlsx_data = load_xlsx(xlsx_file_path)
